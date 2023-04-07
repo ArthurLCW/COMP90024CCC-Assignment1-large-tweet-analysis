@@ -4,6 +4,8 @@
 #include <map>
 #include <bits/stdc++.h>
 #include "task2.h"
+#include "task1.h"
+#include "task3.h"
 using namespace std;
 using namespace std::chrono;
 
@@ -24,6 +26,10 @@ int main(){
      * Including maps, etc...
      * */
     /** Task 1 */
+    map<string, int> tweet_counts; // Task 1 data structure
+    
+    
+    
 
     /** Task 2 */
     map<string, int> gcc_count_map;
@@ -36,6 +42,7 @@ int main(){
     gcc_count_map["7gdar"]=0;
     
     /** Task 3 */
+    map<string, set<string>> tweeters_location; // Task 3 data structure
 
     /**
      * Read from sal.json to obtain a map of location-gcd.
@@ -107,6 +114,7 @@ int main(){
             if (pos1 != string::npos){
                 size_t comma_pos = input_line.rfind(",");
                 username = input_line.substr(pos1+search_term_user_len+4, comma_pos-(pos1+search_term_user_len+4)-1);
+                
                 seek_user = false;
                 // cout<<username<<endl;
             }
@@ -127,11 +135,13 @@ int main(){
                 // cout<<place_full_name<<endl;
 
                 /** Task 1 */
+                task1(tweet_counts, username);
 
                 /** Task 2 */
                 task2(gcc_count_map, place_map, place_full_name);
 
                 /** Task 3 */
+                task3(tweeters_location, username, place_map, place_full_name);
             }
         }
     }
@@ -141,4 +151,7 @@ int main(){
 
     // cout<<"total records from lib: "<<countMapElements(place_map)<<endl;
     testTask2(gcc_count_map);
+    printTop10Tweeters(tweet_counts);
+    
+    printTop10CityTweeters(tweeters_location, tweet_counts);
 }
