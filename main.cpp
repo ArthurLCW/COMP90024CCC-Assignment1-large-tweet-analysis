@@ -6,6 +6,10 @@
 #include "task2.h"
 #include "task1.h"
 #include "task3.h"
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <tuple>
 using namespace std;
 using namespace std::chrono;
 
@@ -141,7 +145,13 @@ int main(){
                 task2(gcc_count_map, place_map, place_full_name);
 
                 /** Task 3 */
+                
+
+
                 task3(tweeters_location, username, place_map, place_full_name);
+                
+
+
             }
         }
     }
@@ -152,6 +162,25 @@ int main(){
     // cout<<"total records from lib: "<<countMapElements(place_map)<<endl;
     testTask2(gcc_count_map);
     printTop10Tweeters(tweet_counts);
+    printf("Place Map:\n");
+for (auto it = place_map.begin(); it != place_map.end(); it++) {
+    printf("%s -> %s\n", it->first.c_str(), it->second.c_str());
+}
+
+    printf("Tweeters Location:\n");
+for (const auto& entry : tweeters_location) {
+    const std::string& author_id = entry.first;
+    printf("%s:", author_id.c_str());
+    for (const auto& location : entry.second) {
+        printf(" %s", location.c_str());
+    }
+    printf("\n");
+}
+
     
-    printTop10CityTweeters(tweeters_location, tweet_counts);
+    
+    printTopTweetersInCities(tweeters_location, tweet_counts);
+
+
+    
 }
