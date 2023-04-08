@@ -1,15 +1,20 @@
 #include <map>
 #include <set>
 #include <iostream>
+#include <vector>
 #include "task3.h"
+#include <algorithm>
+
 using namespace std;
 
 
-void task3(map<string, set<string>> &tweeters_location, const string &username, map<string, string> &place_map, const string place_name) {
+void task3(map<string, set<string>> &tweeters_location, const string &username, map<string, string> &place_map, const string &place_full_name) {
     // place map after task 2
-    if (place_map.count(place_name) > 0) {
-        string gcc_name = place_map[place_name];
+    string gcc_name = place_map[place_full_name];
+    
+    if (!gcc_name.empty()) {
         tweeters_location[username].insert(gcc_name);
+    
     }
 }
     

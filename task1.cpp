@@ -1,6 +1,9 @@
 #include <map>
 #include <iostream>
 #include "task1.h"
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
 void task1(map<string, int> &tweet_counts, const string &username) {
