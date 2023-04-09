@@ -19,8 +19,8 @@ int main(){
      * constant variables.
      * */
 //    const string filename = "testFilesTask3.txt";
-    const string filename = "tinyTwitter.json";
-//    const string filename = "smallTwitter.json";
+//    const string filename = "tinyTwitter.json";
+    const string filename = "smallTwitter.json";
     const int proc_num = 1;
     const string place_file = "sal.json";
 //    const string place_file = "salTest.txt";

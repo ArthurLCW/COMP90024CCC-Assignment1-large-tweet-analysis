@@ -26,9 +26,10 @@ void printTop10Tweeters(const map<string, int> &tweet_counts) {
     //sorts the top_tweeters vector in descending order 
     //uses lambda function.
 
-    cout << "Top 10 Tweeters:" << endl;
+    printf("Top 10 Tweeters:\n");
     for (size_t i = 0; i < 10 && i < top_tweeters.size(); i++) {
-        cout << "#" << i + 1 << " " << top_tweeters[i].first << " " << top_tweeters[i].second << endl;
+        string output = "#" + to_string(i + 1) + top_tweeters[i].first + " " + to_string(top_tweeters[i].second);
+        printf("%s\n", output.c_str());
     }
     // top 10 of the sorted top_tweeters vector 
     // (or until the end if it has fewer than 10) 

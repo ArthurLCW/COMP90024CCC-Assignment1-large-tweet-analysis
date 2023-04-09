@@ -115,7 +115,7 @@ void printTopTweetersInCities(const std::map<std::string, int *> &tweeters_locat
         int city_count = std::get<1>(author_entry);
         int total_tweets = std::get<2>(author_entry);
 
-        std::string output = "#"+std::to_string(i)+" "+author_id+" "+std::to_string(city_count)+" (#"+std::to_string(total_tweets)
+        std::string output = "#"+std::to_string(i+1)+" "+author_id+" "+std::to_string(city_count)+" (#"+std::to_string(total_tweets)
                 + " tweets - ";
         bool first_tweeted_city = true;
         std::map<std::string, int*>::const_iterator it = tweeters_location.find(author_id);

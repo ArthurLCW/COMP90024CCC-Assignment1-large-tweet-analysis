@@ -33,6 +33,8 @@ void task2(map<string, int> &gcc_count_map, map<string, string> &place_map, stri
 void testTask2(map<string, int> &gcc_count_map){
     std::map<std::string, int>::iterator it = gcc_count_map.begin();
     // Iterate through the map and print the elements
+
+    printf("Tweets in all greater capital cities:\n");
     while (it != gcc_count_map.end()){
         string gcc = it->first;
         int count = it->second;
