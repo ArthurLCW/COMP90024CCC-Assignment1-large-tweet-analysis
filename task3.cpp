@@ -36,6 +36,7 @@ void task3(std::map<std::string, int *> &tweeters_location,
         else if (gcc=="5gper") gcc_idx=5;
         else if (gcc=="6ghob") gcc_idx=6;
         else if (gcc=="7gdar") gcc_idx=7;
+        else return;
 
         if (tweeters_location.count(username)<=0){ // if the user is new
             int* gcc_records = new int[8]();
@@ -43,7 +44,7 @@ void task3(std::map<std::string, int *> &tweeters_location,
             gcc_records[gcc_idx] = 1;
             gcc_records[0] = 1; // index 0 used for recording number of cities that user has tweeted.
             tweeters_location[username] = gcc_records;
-//            std::cout<<"first insert for user: "<<username<<" with city records: "<<tweeters_location[username][0]<<" "
+//            std::cout<<"first insert for user: "<<username<<", gcc: "<<gcc_idx<<", with city records: "<<tweeters_location[username][0]<<" "
 //                <<tweeters_location[username][1]<<" "<<tweeters_location[username][2]<<" "<<tweeters_location[username][3]<<" "
 //                <<tweeters_location[username][4]<<" "<<tweeters_location[username][5]<<" "<<tweeters_location[username][6]<<" "
 //                <<tweeters_location[username][7]<<std::endl;
