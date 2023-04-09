@@ -18,8 +18,8 @@ int main(){
     /**
      * constant variables.
      * */
-//    const string filename = "testFiles.txt";
-    const string filename = "tinyTwitter.json";
+    const string filename = "testFilesTask3.txt";
+//    const string filename = "tinyTwitter.json";
 //    const string filename = "smallTwitter.json";
     const int proc_num = 1;
     const string place_file = "sal.json";
@@ -31,9 +31,6 @@ int main(){
      * */
     /** Task 1 */
     map<string, int> tweet_counts; // Task 1 data structure
-    
-    
-    
 
     /** Task 2 */
     map<string, int> gcc_count_map;
@@ -46,7 +43,8 @@ int main(){
     gcc_count_map["7gdar"]=0;
     
     /** Task 3 */
-    map<string, set<string>> tweeters_location; // Task 3 data structure
+//    map<string, set<string>> tweeters_location_lxq; // Task 3 data structure
+    map<string, int *> tweeters_location;
 
     /**
      * Read from sal.json to obtain a map of location-gcd.
@@ -145,13 +143,8 @@ int main(){
                 task2(gcc_count_map, place_map, place_full_name);
 
                 /** Task 3 */
-                
-
-
-                task3(tweeters_location, username, place_map, place_full_name);
-                
-
-
+                // task3LXQ(tweeters_location_lxq, username, place_map, place_full_name);
+                task3(tweeters_location, username, place_full_name, place_map);
             }
         }
     }
@@ -159,28 +152,31 @@ int main(){
     duration = duration_cast<microseconds>(stop - start);
     printf("All tasks execution time (microseconds): %d\n", duration.count());
 
-    // cout<<"total records from lib: "<<countMapElements(place_map)<<endl;
-    testTask2(gcc_count_map);
+    /** Task 1 result */
     printTop10Tweeters(tweet_counts);
-    printf("Place Map:\n");
-for (auto it = place_map.begin(); it != place_map.end(); it++) {
-    printf("%s -> %s\n", it->first.c_str(), it->second.c_str());
-}
 
-    printf("Tweeters Location:\n");
-for (const auto& entry : tweeters_location) {
-    const std::string& author_id = entry.first;
-    printf("%s:", author_id.c_str());
-    for (const auto& location : entry.second) {
-        printf(" %s", location.c_str());
-    }
-    printf("\n");
-}
+    /** Task 2 result */
+    testTask2(gcc_count_map);
 
-    
-    
-    printTopTweetersInCities(tweeters_location, tweet_counts);
+    /** Task 3 */
+    printTopTweetersInCities(tweeters_location);
 
+    /** Task 3 result lxq */
+//    printf("Tweeters Location:\n");
+//    for (const auto& entry : tweeters_location_lxq) {
+//        const std::string& author_id = entry.first;
+//        printf("%s:", author_id.c_str());
+//        for (const auto& location : entry.second) {
+//            printf(" %s", location.c_str());
+//        }
+//        printf("\n");
+//    }
+//    printf("-----------------\n");
+//    printTopTweetersInCitiesLXQ(tweeters_location_lxq, tweet_counts);
 
+//    printf("Place Map:\n");
+//    for (auto it = place_map.begin(); it != place_map.end(); it++) {
+//        printf("%s -> %s\n", it->first.c_str(), it->second.c_str());
+//    }
     
 }

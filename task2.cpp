@@ -3,7 +3,7 @@
 using namespace std;
 
 /** TODO: Need further extension and enhancement! */
-string getGCC(map<string, string> &place_map, map<string, int> &gcc_count_map, string place_name){
+string getGCC(map<string, string> &place_map, map<string, int> &gcc_count_map, string &place_name){
     // cout<<"getGCC0 place name: "<<place_name<<endl;
     if (place_map.count(place_name)>0){ // the place name exists directly inside the place name map.
         // cout<<"getGCC1 place name: "<<place_name<<endl;
@@ -15,7 +15,7 @@ string getGCC(map<string, string> &place_map, map<string, int> &gcc_count_map, s
 //     return "1gsyd";
 }
 
-void task2(map<string, int> &gcc_count_map, map<string, string> &place_map, string place_name){
+void task2(map<string, int> &gcc_count_map, map<string, string> &place_map, string &place_name){
     // firstly, get real name, delete comma
     size_t pos_comma = place_name.find(",");
     if (pos_comma!=string::npos){ // there is such a comma
@@ -34,7 +34,20 @@ void testTask2(map<string, int> &gcc_count_map){
     std::map<std::string, int>::iterator it = gcc_count_map.begin();
     // Iterate through the map and print the elements
     while (it != gcc_count_map.end()){
-        std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+        string gcc = it->first;
+        int count = it->second;
+        string output;
+        if (gcc=="1gsyd") output=gcc + " (Greater Sydney) ";
+        else if (gcc=="2gmel") output=gcc + " (Greater Melbourne) ";
+        else if (gcc=="3gbri") output=gcc + " (Greater Brisbane) ";
+        else if (gcc=="4gade") output=gcc + " (Greater Adelaide) ";
+        else if (gcc=="5gper") output=gcc + " (Greater Perth) ";
+        else if (gcc=="6ghob") output=gcc + " (Greater Hobart) ";
+        else if (gcc=="7gdar") output=gcc + " (Greater Darwin) ";
+        output+=to_string(count);
+        printf("%s\n", output.c_str());
+
+        //std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
         ++it;
     }
 }
