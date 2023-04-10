@@ -187,7 +187,12 @@ int main(int argc, char* argv[]){
     map<string, int> top_tweeters_map;
     for (int i=0; i<10*world_size; i++){
         string author_id(&global_top_names[i*32]);
-        top_tweeters_map[author_id] = tweet_counts[author_id];
+        if (tweet_counts.count(author_id)>0) {
+            top_tweeters_map[author_id] = tweet_counts[author_id];
+        }
+        else{
+            top_tweeters_map[author_id] = 0;
+        }
     }
     int top_tweeters_size = top_tweeters_map.size();
 //    // test the correctness of the map
@@ -287,35 +292,62 @@ int main(int argc, char* argv[]){
 //               top_places_tweeters_vec[i].second[4], top_places_tweeters_vec[i].second[5], top_places_tweeters_vec[i].second[6]);
 //    }
 
-
-    // set up array to store authors' names for all procs
-    char* top_places_tweeters_names_individual = new char[10*32];
+    // get top tweeters name from all place procs. Form a map to store the name, values of all top 10 tweeters in cities among all procs.
+    char* local_top_places_names = new char[10*32];
     for (size_t i = 0; i < 10 && i < top_places_tweeters_vec.size(); i++) {
-        strcpy(&top_places_tweeters_names_individual[i*32], top_places_tweeters_vec[i].first.c_str());
+        strcpy(&local_top_places_names[i*32], top_places_tweeters_vec[i].first.c_str());
     }
-
-    // set up array to store authors' tweet numbers for all procs
-    int* top_places_tweeters_value_individual = new int[10*7]();
-    for (size_t i = 0; i < 10 && i < top_places_tweeters_vec.size(); i++) {
-        for (size_t j=0; j<7; j++){
-            top_places_tweeters_value_individual[i*7+j] = top_places_tweeters_vec[i].second[j];
+    char* global_top_places_names = new char[10*32*world_size];
+    MPI_Allgather(local_top_places_names, 10*32, MPI_CHAR, global_top_places_names, 10*32, MPI_CHAR, MPI_COMM_WORLD);
+    map<string, vector<int>> top_place_tweeters_map;
+    for (int i=0; i<10*world_size; i++){
+        string author_id(&global_top_places_names[i*32]);
+        vector<int> gcc_count_records = {0,0,0,0,0,0,0};
+        if (tweeters_location.count(author_id)>0){
+            for (int i=0; i<7; i++){
+                gcc_count_records[i] = i;
+                gcc_count_records[i] = tweeters_location[author_id][i+1];
+            }
         }
+        top_place_tweeters_map[author_id] = gcc_count_records;
+    }
+    int top_places_tweeters_size = top_place_tweeters_map.size();
+
+    // test the correctness of the map
+    for (auto it = top_place_tweeters_map.begin(); it != top_place_tweeters_map.end(); ++it) {
+        printf("Read top PLACE tweeters map from proc %d with size %d, %s %d %d %d %d %d %d %d\n", world_rank, top_places_tweeters_size,
+               it->first.c_str(), it->second[0], it->second[1], it->second[2], it->second[3],
+               it->second[4], it->second[5], it->second[6]);
     }
 
-    // declare receive buffer
+
+    // set up array to store authors' tweet name and value
+    char* top_places_tweeters_names_individual = new char[top_places_tweeters_size*32];
+    int* top_places_tweeters_value_individual = new int[top_places_tweeters_size*7]();
+    count = 0;
+    for (auto it = top_place_tweeters_map.begin(); it != top_place_tweeters_map.end(); ++it) {
+        strcpy(&top_places_tweeters_names_individual[count*32], it->first.c_str());
+        for (int i=0; i<7; i++){
+            top_places_tweeters_value_individual[count*7+i] = it->second[i];
+        }
+        count++;
+    }
+
+    // set up receiving buffers
     char* top_places_tweeters_names_total = NULL;
     int* top_places_tweeters_value_total = NULL;
     if (world_rank==0){
-        top_places_tweeters_names_total = new char[world_size*10*32]();
-        top_places_tweeters_value_total = new int[world_size*10*7]();
+        top_places_tweeters_names_total = new char[world_size*top_places_tweeters_size*32]();
+        top_places_tweeters_value_total = new int[world_size*top_places_tweeters_size*7]();
     }
 
+
     // calculate final answer for task3
-    MPI_Gather(top_places_tweeters_names_individual, 10*32, MPI_CHAR, top_places_tweeters_names_total, 10*32, MPI_CHAR, 0, MPI_COMM_WORLD);
-    MPI_Gather(top_places_tweeters_value_individual, 10*7, MPI_INT, top_places_tweeters_value_total, 10*7, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(top_places_tweeters_names_individual, top_places_tweeters_size*32, MPI_CHAR, top_places_tweeters_names_total, top_places_tweeters_size*32, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Gather(top_places_tweeters_value_individual, top_places_tweeters_size*7, MPI_INT, top_places_tweeters_value_total, top_places_tweeters_size*7, MPI_INT, 0, MPI_COMM_WORLD);
     if (world_rank==0){
         // test print out received data
-//        for (int i=0; i<world_size*10; i++){
+//        for (int i=0; i<world_size*top_places_tweeters_size; i++){
 //            printf("Test receiving data in proc %d: authorID: %s, %d %d %d %d %d %d %d\n", world_rank,
 //                   &top_places_tweeters_names_total[i*32], top_places_tweeters_value_total[i*7+0],
 //                   top_places_tweeters_value_total[i*7+1], top_places_tweeters_value_total[i*7+2], top_places_tweeters_value_total[i*7+3],
@@ -324,7 +356,7 @@ int main(int argc, char* argv[]){
 
 
         map<string, int*> tweet_places_counts_final;
-        for (int i=0; i<world_size*10; i++){
+        for (int i=0; i<world_size*top_places_tweeters_size; i++){
             string author_id(&top_places_tweeters_names_total[i*32]);
             if (tweet_places_counts_final.count(author_id)<=0){ // author does not exist yet
                 int* gcc_counts = new int[8]();
@@ -346,9 +378,6 @@ int main(int argc, char* argv[]){
         printTopTweetersInCities(tweet_places_counts_final, true);
     }
 
-
-
     MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
-
 }
