@@ -1,34 +1,23 @@
       "full_name": "Australia",
-
       "author_id": "00",
 "full_name": "New South Wales, Australia",
-
       "author_id": "00",
 "full_name": "Eveleigh, Sydney",
-
       "author_id": "01",
 "full_name": "Eveleigh, Sydney",
-
       "author_id": "00",
 "full_name": "Melbourne, Victoria",
-
       "author_id": "00",
 "full_name": "Pakenham, Victoria",
-
       "author_id": "01",
 "full_name": "Pakenham, Victoria",
-
       "author_id": "01",
 "full_name": "Pakenham, Victoria",
-
       "author_id": "00",
 "full_name": "Brisbane, Queensland",
-
       "author_id": "02",
 "full_name": "Brisbane, Queensland",
-
       "author_id": "02",
 "full_name": "Eveleigh, Sydney",
-
       "author_id": "03",
 "full_name": "Eveleigh, Sydney",
