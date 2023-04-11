@@ -38,9 +38,9 @@ vector<pair<string, int>> printTop10Tweeters(const map<string, int> &tweet_count
             printf("%s\n", output.c_str());
         }
 
-        std::map<std::string, int>::const_iterator it = tweet_counts.find("1250331934242123776");
+//        std::map<std::string, int>::const_iterator it = tweet_counts.find("1250331934242123776");
+//        printf("print 1250331934242123776 result: %d\n", it->second);
 
-        printf("print 1250331934242123776 result: %d\n", it->second);
         // top 10 of the sorted top_tweeters vector
         // (or until the end if it has fewer than 10)
         // prints

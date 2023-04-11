@@ -33,6 +33,7 @@ int main(int argc, char* argv[]){
 //    const string filename = "tinyTwitter.json";
     const string filename = "smallTwitter.json";
     const string place_file = "sal.json";
+//    const string filename = "/data/projects/COMP90024/bigTwitter.json";
 //    const string place_file = "salTest.txt";
 
     /**
@@ -96,18 +97,18 @@ int main(int argc, char* argv[]){
     start = high_resolution_clock::now();
     ifstream in_file(filename, ios::binary);
     in_file.seekg(0, ios::end);
-    int file_size = in_file.tellg();
-    int proc_file_size = file_size/world_size;
+    long long file_size = in_file.tellg();
+    long long proc_file_size = file_size/world_size;
     stop = high_resolution_clock::now();
     duration = duration_cast<microseconds>(stop - start);
-    printf("size of file (bytes): %d, reading time (microseconds): %d\n", file_size, duration.count());
+    printf("size of file (bytes): %lld, reading time (microseconds): %d\n", file_size, duration.count());
 
 
     /**
      * Read the tweet files. Need to be done in parallel.
      * Get username and place name.
      * */
-    in_file.seekg(world_rank*(file_size/world_size)); // TODO: [parallel] Read from different location.
+    in_file.seekg(world_rank*proc_file_size); // TODO: [parallel] Read from different location.
     string input_line;
     string search_term_place = "\"full_name\": ";
     string search_term_user = "author_id";
@@ -119,8 +120,8 @@ int main(int argc, char* argv[]){
     // i.e., those only have place but without username.
     start = high_resolution_clock::now();
     bool seek_user = true;
-    int row_num_total=0;
-    int pair_num = 0;
+    long long row_num_total=0;
+    long long pair_num = 0;
     while (getline (in_file, input_line)) {
         // cout << input_line <<endl;
         if (in_file.tellg()>proc_file_size*(world_rank+1)){
@@ -169,15 +170,12 @@ int main(int argc, char* argv[]){
         }
     }
 
-    printf("Process id: %d, row_num_total: %d, pair_num: %d, line: %s\n", world_rank, row_num_total, pair_num, input_line.c_str());
+    printf("Process id: %d, row_num_total: %lld, pair_num: %lld, line: %s\n", world_rank, row_num_total, pair_num, input_line.c_str());
 
-    stop = high_resolution_clock::now();
-    duration = duration_cast<microseconds>(stop - start);
-    printf("All tasks execution time (microseconds): %d\n", duration.count());
 
     /** Task 1 result */
     // get top tweeters name from all procs. Form a map to store the name, values of all top 10 tweeters among all procs.
-    vector<pair<string, int>> top_tweeters_vec = printTop10Tweeters(tweet_counts, true);
+    vector<pair<string, int>> top_tweeters_vec = printTop10Tweeters(tweet_counts, false);
     char* local_top_names = new char[10*32];
     for (size_t i = 0; i < 10 && i < top_tweeters_vec.size(); i++) {
         strcpy(&local_top_names[i*32], top_tweeters_vec[i].first.c_str());
@@ -314,11 +312,11 @@ int main(int argc, char* argv[]){
     int top_places_tweeters_size = top_place_tweeters_map.size();
 
     // test the correctness of the map
-    for (auto it = top_place_tweeters_map.begin(); it != top_place_tweeters_map.end(); ++it) {
-        printf("Read top PLACE tweeters map from proc %d with size %d, %s %d %d %d %d %d %d %d\n", world_rank, top_places_tweeters_size,
-               it->first.c_str(), it->second[0], it->second[1], it->second[2], it->second[3],
-               it->second[4], it->second[5], it->second[6]);
-    }
+//    for (auto it = top_place_tweeters_map.begin(); it != top_place_tweeters_map.end(); ++it) {
+//        printf("Read top PLACE tweeters map from proc %d with size %d, %s %d %d %d %d %d %d %d\n", world_rank, top_places_tweeters_size,
+//               it->first.c_str(), it->second[0], it->second[1], it->second[2], it->second[3],
+//               it->second[4], it->second[5], it->second[6]);
+//    }
 
 
     // set up array to store authors' tweet name and value
@@ -376,6 +374,12 @@ int main(int argc, char* argv[]){
             }
         }
         printTopTweetersInCities(tweet_places_counts_final, true);
+    }
+
+    if (world_rank==0){
+        stop = high_resolution_clock::now();
+        duration = duration_cast<microseconds>(stop - start);
+        printf("All tasks execution time (microseconds): %d\n", duration.count());
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
