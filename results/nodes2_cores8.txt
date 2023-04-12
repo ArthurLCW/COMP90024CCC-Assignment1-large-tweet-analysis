@@ -1,0 +1,96 @@
+Process 3 from machine spartan-bm028.hpc.unimelb.edu.au
+Process 1 from machine spartan-bm028.hpc.unimelb.edu.au
+Process 4 from machine spartan-bm029.hpc.unimelb.edu.au
+Process 5 from machine spartan-bm029.hpc.unimelb.edu.au
+Process 7 from machine spartan-bm029.hpc.unimelb.edu.au
+place file reading time (microseconds): 22459
+place file reading time (microseconds): 22962
+size of file (bytes): 18735307060, reading time (microseconds): 317
+size of file (bytes): 18735307060, reading time (microseconds): 266
+place file reading time (microseconds): 22190
+size of file (bytes): 18735307060, reading time (microseconds): 103
+place file reading time (microseconds): 21446
+size of file (bytes): 18735307060, reading time (microseconds): 813
+place file reading time (microseconds): 21266
+size of file (bytes): 18735307060, reading time (microseconds): 980
+Num of processes: 8
+Process 0 from machine spartan-bm028.hpc.unimelb.edu.au
+Process 2 from machine spartan-bm028.hpc.unimelb.edu.au
+Process 6 from machine spartan-bm029.hpc.unimelb.edu.au
+place file reading time (microseconds): 21864
+size of file (bytes): 18735307060, reading time (microseconds): 102
+place file reading time (microseconds): 21805
+size of file (bytes): 18735307060, reading time (microseconds): 122
+place file reading time (microseconds): 21906
+size of file (bytes): 18735307060, reading time (microseconds): 130
+Process id: 7, row_num_total: 88508463, pair_num: 961832, line:   }
+Process id: 6, row_num_total: 88213195, pair_num: 998211, line:               -38.433859306,
+Process id: 5, row_num_total: 88825713, pair_num: 1085479, line:     "data": {
+Process id: 4, row_num_total: 90605113, pair_num: 1212152, line:         "id": "1550140660799262720",
+Process id: 3, row_num_total: 90716762, pair_num: 1223288, line:             "end": 52,
+Process id: 2, row_num_total: 90773381, pair_num: 1212476, line:             "description": "President of Russia Vladimir Putin"
+Process id: 1, row_num_total: 91028658, pair_num: 1213559, line:           "geo": {
+Process id: 0, row_num_total: 89843068, pair_num: 1185274, line:           },
+Top 10 Tweeters:
+#1 1498063511204761601 68477
+#2 1089023364973219840 28128
+#3 826332877457481728 27718
+#4 1250331934242123776 25350
+#5 1423662808311287813 21034
+#6 1183144981252280322 20765
+#7 1270672820792508417 20503
+#8 820431428835885059 20063
+#9 778785859030003712 19403
+#10 1104295492433764353 18781
+Tweets in all greater capital cities:
+1gsyd (Greater Sydney) 2114697
+2gmel (Greater Melbourne) 2267050
+3gbri (Greater Brisbane) 855448
+4gade (Greater Adelaide) 451517
+5gper (Greater Perth) 589115
+6ghob (Greater Hobart) 90053
+7gdar (Greater Darwin) 46376
+Top 10 Tweeters in Most Greater Capital Cities:
+#1 1429984556451389440 7 (#1895 tweets - #10gsyd, #1868gmel, #6gbri, #2gade, #7gper, #1ghob, #1gdar)
+#2 17285408 7 (#1166 tweets - #1041gsyd, #60gmel, #40gbri, #3gade, #7gper, #11ghob, #4gdar)
+#3 702290904460169216 7 (#1078 tweets - #288gsyd, #246gmel, #219gbri, #114gade, #151gper, #40ghob, #20gdar)
+#4 87188071 7 (#356 tweets - #108gsyd, #84gmel, #64gbri, #29gade, #51gper, #15ghob, #5gdar)
+#5 502381727 7 (#240 tweets - #2gsyd, #214gmel, #8gbri, #4gade, #3gper, #8ghob, #1gdar)
+#6 921197448885886977 7 (#192 tweets - #46gsyd, #56gmel, #37gbri, #20gade, #28gper, #4ghob, #1gdar)
+#7 1382217768649465858 7 (#189 tweets - #11gsyd, #50gmel, #14gbri, #13gade, #43gper, #50ghob, #8gdar)
+#8 601712763 7 (#136 tweets - #44gsyd, #39gmel, #11gbri, #19gade, #14gper, #8ghob, #1gdar)
+#9 2647302752 7 (#76 tweets - #13gsyd, #16gmel, #32gbri, #3gade, #4gper, #5ghob, #3gdar)
+#10 376076845 6 (#2703 tweets - #58gsyd, #20gmel, #4gbri, #16gade, #2588gper, #17gdar)
+All tasks execution time (microseconds): 39896451
+Job ID           : 46286898
+Cluster          : spartan
+User/Project     : changwenl/comp90024
+Nodes            : 2
+Wall-clock time  : 00:00:44 / 00:03:00
+
+Displaying overall resources usage from 2023-04-11 23:30:37 to 2023-04-11 23:31:21:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm028 : 
+                CPU# 1    : 64.3   (  52.5 /  11.7 /   0.0 /  35.7 ) 
+                CPU# 2    : 58.8   (  47.2 /  11.6 /   0.0 /  41.2 ) 
+                CPU# 3    : 58.0   (  46.8 /  11.2 /   0.0 /  42.0 ) 
+                CPU# 4    : 57.8   (  46.6 /  11.2 /   0.0 /  42.2 ) 
+
+spartan-bm029 : 
+                CPU# 5    : 65.4   (  50.2 /  15.2 /   0.0 /  34.6 ) 
+                CPU# 6    : 64.3   (  49.6 /  14.7 /   0.0 /  35.7 ) 
+                CPU# 7    : 63.6   (  49.5 /  14.1 /   0.0 /  36.4 ) 
+                CPU# 8    : 63.7   (  48.7 /  15.0 /   0.0 /  36.3 ) 
+
+
+Allocated CPUs            : 8    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 8    
+
+Memory used (RAM)         : 1.1%  [368MB of 32000MB]
+
+--------------------------------------------
+

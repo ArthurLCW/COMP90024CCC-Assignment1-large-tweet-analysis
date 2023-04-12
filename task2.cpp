@@ -4,15 +4,11 @@ using namespace std;
 
 /** TODO: Need further extension and enhancement! */
 string getGCC(map<string, string> &place_map, map<string, int> &gcc_count_map, string &place_name){
-    // cout<<"getGCC0 place name: "<<place_name<<endl;
     if (place_map.count(place_name)>0){ // the place name exists directly inside the place name map.
-        // cout<<"getGCC1 place name: "<<place_name<<endl;
         string gcc_name = place_map[place_name];
         if (gcc_count_map.count(gcc_name)>0) return place_map[place_name];
     }
     return "";
-
-//     return "1gsyd";
 }
 
 void task2(map<string, int> &gcc_count_map, map<string, string> &place_map, string &place_name){
@@ -24,9 +20,7 @@ void task2(map<string, int> &gcc_count_map, map<string, string> &place_map, stri
 
     string gcc_name = getGCC(place_map, gcc_count_map, place_name);
     if (gcc_name.size()>0){
-        // cout<<"task2 gcc name0: "<<gcc_name<<", count: "<<gcc_count_map[gcc_name]<<endl;
         gcc_count_map[gcc_name] += 1;
-        // cout<<"task2 gcc name1: "<<gcc_name<<", count: "<<gcc_count_map[gcc_name]<<endl;
     }
 }
 
@@ -48,8 +42,6 @@ void testTask2(map<string, int> &gcc_count_map){
         else if (gcc=="7gdar") output=gcc + " (Greater Darwin) ";
         output+=to_string(count);
         printf("%s\n", output.c_str());
-
-        //std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
         ++it;
     }
 }

@@ -1,0 +1,59 @@
+Num of processes: 1
+Process 0 from machine spartan-bm008.hpc.unimelb.edu.au
+place file reading time (microseconds): 21936
+size of file (bytes): 18735307060, reading time (microseconds): 460
+Process id: 0, row_num_total: 718514355, pair_num: 9092274, line: 
+Top 10 Tweeters:
+#1 1498063511204761601 68477
+#2 1089023364973219840 28128
+#3 826332877457481728 27718
+#4 1250331934242123776 25350
+#5 1423662808311287813 21034
+#6 1183144981252280322 20765
+#7 1270672820792508417 20503
+#8 820431428835885059 20063
+#9 778785859030003712 19403
+#10 1104295492433764353 18781
+Tweets in all greater capital cities:
+1gsyd (Greater Sydney) 2114698
+2gmel (Greater Melbourne) 2267051
+3gbri (Greater Brisbane) 855448
+4gade (Greater Adelaide) 451517
+5gper (Greater Perth) 589115
+6ghob (Greater Hobart) 90053
+7gdar (Greater Darwin) 46376
+Top 10 Tweeters in Most Greater Capital Cities:
+#1 1429984556451389440 7 (#1895 tweets - #10gsyd, #1868gmel, #6gbri, #2gade, #7gper, #1ghob, #1gdar)
+#2 17285408 7 (#1166 tweets - #1041gsyd, #60gmel, #40gbri, #3gade, #7gper, #11ghob, #4gdar)
+#3 702290904460169216 7 (#1078 tweets - #288gsyd, #246gmel, #219gbri, #114gade, #151gper, #40ghob, #20gdar)
+#4 87188071 7 (#356 tweets - #108gsyd, #84gmel, #64gbri, #29gade, #51gper, #15ghob, #5gdar)
+#5 1361519083 7 (#254 tweets - #12gsyd, #36gmel, #1gbri, #9gade, #1gper, #2ghob, #193gdar)
+#6 502381727 7 (#240 tweets - #2gsyd, #214gmel, #8gbri, #4gade, #3gper, #8ghob, #1gdar)
+#7 921197448885886977 7 (#192 tweets - #46gsyd, #56gmel, #37gbri, #20gade, #28gper, #4ghob, #1gdar)
+#8 1382217768649465858 7 (#189 tweets - #11gsyd, #50gmel, #14gbri, #13gade, #43gper, #50ghob, #8gdar)
+#9 601712763 7 (#136 tweets - #44gsyd, #39gmel, #11gbri, #19gade, #14gper, #8ghob, #1gdar)
+#10 2647302752 7 (#76 tweets - #13gsyd, #16gmel, #32gbri, #3gade, #4gper, #5ghob, #3gdar)
+All tasks execution time (microseconds): 299752047
+Job ID           : 46286896
+Cluster          : spartan
+User/Project     : changwenl/comp90024
+Nodes            : 1
+Wall-clock time  : 00:05:03 / 00:10:00
+
+Displaying overall resources usage from 2023-04-11 23:30:37 to 2023-04-11 23:35:40:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm008 : 
+                CPU# 1    : 96.9   (  77.0 /  19.9 /   0.0 /   3.1 ) 
+
+
+Allocated CPUs            : 1    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 1    
+
+Memory used (RAM)         : 2.9%  [116MB of 4000MB]
+
+--------------------------------------------
+

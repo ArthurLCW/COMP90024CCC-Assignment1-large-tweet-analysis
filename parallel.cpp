@@ -30,8 +30,8 @@ int main(int argc, char* argv[]){
      * constant variables.
      * */
 //    const string filename = "testFilesTask3.txt";
-//    const string filename = "tinyTwitter.json";
-    const string filename = "smallTwitter.json";
+    const string filename = "tinyTwitter.json";
+//    const string filename = "smallTwitter.json";
     const string place_file = "sal.json";
 //    const string filename = "/data/projects/COMP90024/bigTwitter.json";
 //    const string place_file = "salTest.txt";
@@ -54,7 +54,6 @@ int main(int argc, char* argv[]){
     gcc_count_map["7gdar"]=0;
 
     /** Task 3 */
-//    map<string, set<string>> tweeters_location_lxq; // Task 3 data structure
     map<string, int *> tweeters_location;
 
     /**
@@ -84,7 +83,6 @@ int main(int argc, char* argv[]){
         }
     }
 
-    // cout<<"Place map size: "<<place_map.size()<<endl;
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
     printf("place file reading time (microseconds): %d\n", duration.count());
@@ -123,11 +121,9 @@ int main(int argc, char* argv[]){
     long long row_num_total=0;
     long long pair_num = 0;
     while (getline (in_file, input_line)) {
-        // cout << input_line <<endl;
         if (in_file.tellg()>proc_file_size*(world_rank+1)){
             break;
         }
-        // cout<<in_file.tellg()<<endl;
         row_num_total++;
         size_t pos1, pos0;
 
@@ -138,7 +134,6 @@ int main(int argc, char* argv[]){
                 username = input_line.substr(pos1+search_term_user_len+4, comma_pos-(pos1+search_term_user_len+4)-1);
 
                 seek_user = false;
-                // cout<<username<<endl;
             }
         }
 
@@ -155,7 +150,6 @@ int main(int argc, char* argv[]){
                  * Please try not to modify too much codes.
                  * Finish task 1, 2, 3 under this if clause.
                  * */
-                // cout<<place_full_name<<endl;
 
                 /** Task 1 */
                 task1(tweet_counts, username);
@@ -164,7 +158,6 @@ int main(int argc, char* argv[]){
                 task2(gcc_count_map, place_map, place_full_name);
 
                 /** Task 3 */
-                // task3LXQ(tweeters_location_lxq, username, place_map, place_full_name);
                 task3(tweeters_location, username, place_full_name, place_map);
             }
         }
@@ -193,10 +186,6 @@ int main(int argc, char* argv[]){
         }
     }
     int top_tweeters_size = top_tweeters_map.size();
-//    // test the correctness of the map
-//    for (auto it = top_tweeters_map.begin(); it != top_tweeters_map.end(); ++it) {
-//        printf("Read top tweeters map from proc %d with size %d, %s %d\n", world_rank, top_tweeters_size, it->first.c_str(), it->second);
-//    }
 
     // set up array to store authors' tweet name and value
     char* top_tweeters_names_individual = new char[top_tweeters_size*32];
@@ -233,22 +222,6 @@ int main(int argc, char* argv[]){
         printTop10Tweeters(tweet_counts_final, true);
     }
 
-///////
-
-//    cout<<"Test string to char array"<<endl;
-//    for (size_t i = 0; i < 10 && i < top_tweeters_vec.size(); i++) {
-//        cout<<top_tweeters_names_individual[i]<<endl;
-//    }
-    // string test done. delete later
-//    string str0 = "12345";
-//    string str1 = "67890";
-//    char* charArray = new char[20]();
-//    strcpy(charArray, str0.c_str());
-//    strcpy(&charArray[10], str1.c_str());
-//    cout<<"test str: "<<str0<<" "<<str0.size()<<" "<<str0.c_str()<<" "<<strlen(str0.c_str())<<" "<<charArray<<" "<<strlen(charArray)<<endl;
-//    cout<<"test str: "<<str1<<" "<<str1.size()<<" "<<str1.c_str()<<" "<<strlen(str1.c_str())<<" "<<&charArray[10]<<" "<<strlen(&charArray[10])<<endl;
-
-
     /** Task 2 result */
     int* gcc_records_individual = new int[7]();
     int* gcc_records_total = NULL;
@@ -259,18 +232,14 @@ int main(int argc, char* argv[]){
     gcc_records_individual[4] = gcc_count_map["5gper"];
     gcc_records_individual[5] = gcc_count_map["6ghob"];
     gcc_records_individual[6] = gcc_count_map["7gdar"];
-    // printf("process %d with 1gsyd: %d\n", world_rank, gcc_records_individual[0]);
     if (world_rank==0) gcc_records_total = new int[world_size*7]();
     MPI_Gather(gcc_records_individual, 7, MPI_INT, gcc_records_total, 7, MPI_INT, 0, MPI_COMM_WORLD);
-//    MPI_Barrier(MPI_COMM_WORLD);
 
     if (world_rank==0){
         std::map<std::string, int>::iterator it = gcc_count_map.begin();
-        // testTask2(gcc_count_map);
         for (int i=0; i<7; i++){
             int sum = 0;
             for (int j=0; j<world_size; j++){
-                // printf("%d %d %d\n",j,i,gcc_records_total[i+j*7]);
                 sum += gcc_records_total[i+j*7];
             }
             it->second = sum;
@@ -278,17 +247,9 @@ int main(int argc, char* argv[]){
         }
         testTask2(gcc_count_map);
     }
-//    MPI_Barrier(MPI_COMM_WORLD);
 
     /** Task 3 */
     vector<pair<string, vector<int>>> top_places_tweeters_vec = printTopTweetersInCities(tweeters_location, false);
-    // testing for function output, correct?
-//    for (int i=0; i<10; i++){
-//        printf("Tweeter places in proc %d: authorID: %s, %d %d %d %d %d %d %d\n", world_rank,
-//               top_places_tweeters_vec[i].first.c_str(),top_places_tweeters_vec[i].second[0],
-//               top_places_tweeters_vec[i].second[1], top_places_tweeters_vec[i].second[2], top_places_tweeters_vec[i].second[3],
-//               top_places_tweeters_vec[i].second[4], top_places_tweeters_vec[i].second[5], top_places_tweeters_vec[i].second[6]);
-//    }
 
     // get top tweeters name from all place procs. Form a map to store the name, values of all top 10 tweeters in cities among all procs.
     char* local_top_places_names = new char[10*32];
@@ -311,14 +272,6 @@ int main(int argc, char* argv[]){
     }
     int top_places_tweeters_size = top_place_tweeters_map.size();
 
-    // test the correctness of the map
-//    for (auto it = top_place_tweeters_map.begin(); it != top_place_tweeters_map.end(); ++it) {
-//        printf("Read top PLACE tweeters map from proc %d with size %d, %s %d %d %d %d %d %d %d\n", world_rank, top_places_tweeters_size,
-//               it->first.c_str(), it->second[0], it->second[1], it->second[2], it->second[3],
-//               it->second[4], it->second[5], it->second[6]);
-//    }
-
-
     // set up array to store authors' tweet name and value
     char* top_places_tweeters_names_individual = new char[top_places_tweeters_size*32];
     int* top_places_tweeters_value_individual = new int[top_places_tweeters_size*7]();
@@ -339,20 +292,10 @@ int main(int argc, char* argv[]){
         top_places_tweeters_value_total = new int[world_size*top_places_tweeters_size*7]();
     }
 
-
     // calculate final answer for task3
     MPI_Gather(top_places_tweeters_names_individual, top_places_tweeters_size*32, MPI_CHAR, top_places_tweeters_names_total, top_places_tweeters_size*32, MPI_CHAR, 0, MPI_COMM_WORLD);
     MPI_Gather(top_places_tweeters_value_individual, top_places_tweeters_size*7, MPI_INT, top_places_tweeters_value_total, top_places_tweeters_size*7, MPI_INT, 0, MPI_COMM_WORLD);
     if (world_rank==0){
-        // test print out received data
-//        for (int i=0; i<world_size*top_places_tweeters_size; i++){
-//            printf("Test receiving data in proc %d: authorID: %s, %d %d %d %d %d %d %d\n", world_rank,
-//                   &top_places_tweeters_names_total[i*32], top_places_tweeters_value_total[i*7+0],
-//                   top_places_tweeters_value_total[i*7+1], top_places_tweeters_value_total[i*7+2], top_places_tweeters_value_total[i*7+3],
-//                   top_places_tweeters_value_total[i*7+4], top_places_tweeters_value_total[i*7+5], top_places_tweeters_value_total[i*7+6]);
-//        }
-
-
         map<string, int*> tweet_places_counts_final;
         for (int i=0; i<world_size*top_places_tweeters_size; i++){
             string author_id(&top_places_tweeters_names_total[i*32]);
