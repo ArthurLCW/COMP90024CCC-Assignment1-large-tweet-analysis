@@ -1,14 +1,7 @@
 # COMP90024CCC-Assignment1-large-tweet-analysis
-### 现状
-只完成了task2的串行部分，且只完成了最直接的位置辨认。已经完成阅读文件的不同位置，如指定阅读文件的前12.5%-前25%。   
+### Brief Intro: 
+This project analyzes a huge Twitter file (more than 50GB, available on UniMelb Spartan) in a parallel manner with MPI. 
+This project obtains full marks. According to Prof Richard, our project is the fastest solution. 
+![image](https://github.com/ArthurLCW/COMP90024CCC-Assignment1-large-tweet-analysis/assets/52849817/bab20eef-51e1-45b7-8d98-d49cea386dbe)
 
-### 项目组成
-请把task1，task3的主要实现逻辑写入另外的library，如task1.h&task1.cpp。  
-main.cpp读取每一条tweet的username和place full_name。task1，task2，task3函数使用这两个值做相应计算，并修改相应map。  
-
-### 项目运行
-g++ -o app main.cpp task2.cpp [others.cpp]   
-./app
-
-### 注意事项
-1. 函数的parameter中的map一定要用引用或者指针，否则巨慢！！！
+### For the details (how to execute the code, the architecture and technical details), refer to the [project report](https://github.com/ArthurLCW/COMP90024CCC-Assignment1-large-tweet-analysis/blob/main/a1-report.pdf)
